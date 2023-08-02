@@ -1,0 +1,30 @@
+def fv
+pipeline{
+    tools{
+        maven 'Maven'
+    }
+    stages{
+        stage("init"){
+            steps{
+                script{
+                fv = load 'script2.groovy'
+            }
+            }
+
+        }
+        stage("building"){
+        steps{
+            script{
+                fv.buildjar()
+            }
+        }
+    }
+        stage("deployment"){
+            steps{
+                script{
+                    fv.deploy()
+                }
+            }
+        }
+}
+}
