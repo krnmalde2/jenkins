@@ -1,5 +1,6 @@
 def fv
 pipeline{
+    agent any
     tools{
         maven 'Maven'
     }
