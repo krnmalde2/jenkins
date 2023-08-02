@@ -1,11 +1,19 @@
-
+def gv
 pipeline{
     agent any
     tools {
         maven 'Maven'
     }
     stages{
-      
+
+            stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
         stage("build")
         {
             steps{
@@ -20,16 +28,10 @@ pipeline{
 
         stage("deploying")
         {
-            steps{
-            script{
-            withCredentials([usernamePassword(credentialsid:"dockerhub repo",usernameVariable:'USER', passwordVaraible:'pass')])
-            steps{
-              sh 'docker build . -t krnmalde/jenkinsfile:1.0'
-              sh "echo $pass | docker login -u $USER --password stdin"
-              sh  'docker push krnmalde/jenkinsfile:1.0' 
-            }
-            }
-            }
+            script {
+                    gv.deployApp()
+                }
+
         }
     }
 }
