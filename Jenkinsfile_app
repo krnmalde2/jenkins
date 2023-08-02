@@ -20,12 +20,14 @@ pipeline{
 
         stage("deploying")
         {
+            steps{
             script{
             withCredentials([usernamePassword(credentialsid:"dockerhub repo",usernameVariable:'USER', passwordVaraible:'pass')])
             steps{
               sh 'docker build . -t krnmalde/jenkinsfile:1.0'
               sh "echo $pass | docker login -u $USER --password stdin"
               sh  'docker push krnmalde/jenkinsfile:1.0' 
+            }
             }
             }
         }
