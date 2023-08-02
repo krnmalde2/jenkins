@@ -29,12 +29,14 @@ pipeline{
 
         stage("deploying")
         {   
-            //input in jenkins
+            //input in jenkins -single input
             input {
                 message "select the env to deploy"
                 ok "Done"
                 parameters {
                     choice (name: 'VERSION' , choices:["prod","test"],description:(''))
+                    choice (name: 'TWO' , choices:["prod","test"],description:('')) //multiinput jsut copying param again
+
                 }
                 
             }
@@ -43,6 +45,7 @@ pipeline{
 
                     gv.deploy()
                     echo "deploy to ${VERSION}"
+                    echo "deplot to ${TWO}"
                 }
             }
         }
