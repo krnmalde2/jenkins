@@ -23,7 +23,7 @@ pipeline{
         stage("deployment"){
             steps{
                 script{
-                    fv.deploy()
+                    fv.deployment()
                 }
             }
         }
