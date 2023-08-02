@@ -43,6 +43,7 @@ pipeline{
                 
             
             steps{
+                //global varaiable env
                 script{
                  env.ENV = input message: "select the version", ok:"done", parameters: [choice (name: 'VERSION' , choices:["prod","test"],description:(''))]
                     gv.deploy()
