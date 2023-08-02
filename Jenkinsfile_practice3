@@ -36,12 +36,13 @@ pipeline{
                 parameters {
                     choice (name: 'VERSION' , choices:["prod","test"],description:(''))
                 }
-                echo "deploy to ${VERSION}"
+                
             }
             steps{
                 script{
 
                     gv.deploy()
+                    echo "deploy to ${VERSION}"
                 }
             }
         }
