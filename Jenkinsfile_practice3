@@ -1,0 +1,49 @@
+def gv
+pipeline{
+    agent any
+    stages{
+        stage("init"){
+            steps{
+                script{
+                    gv = load "script.groovy"
+                }
+            }
+        }
+        stage("build")
+        {
+            steps{
+                script{
+                    gv.building()
+                }
+            }
+        }
+
+        stage("testing")
+        {
+            steps{
+                script{
+                    gv.test()
+                }
+            }
+        }
+
+        stage("deploying")
+        {   
+            //input in jenkins
+            input {
+                message "select the env to deploy"
+                ok "Done"
+                parameters {
+                    choice (name: 'VERSION' , choices:["prod","test"],description:(''))
+                }
+                echo "deploy to ${VERSION}"
+            }
+            steps{
+                script{
+
+                    gv.deploy()
+                }
+            }
+        }
+    }
+}
