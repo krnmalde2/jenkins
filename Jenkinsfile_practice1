@@ -1,16 +1,16 @@
 pipeline{
     agent any
     //self defined env variable -global scope
-    environment{
-        NEW_VERSION = "3.10.1"
-        // SERVER_CREDENTIAL = credential('id') //possivle because of credintial vindinf plugin
-        SERVER_CREDENTIAL = credential('docker')
-    }
+     environment{
+         NEW_VERSION = '3.10.1'
+    //     // SERVER_CREDENTIAL = credential('id') //possivle because of credintial vindinf plugin
+    //     SERVER_CREDENTIAL = credential('docker')
+     }
     //paramenter for selectinh choices : eg to deploy to dev ot test ot prod server etc
     parameters {
         // string(name: 'VERSION', defaultValue: '', description:'version deplot on prod')
-        choice(name: 'VERSION', choices: '1.0','2.0','3.2',description:'')
-        booleanParam(name: 'executeTest', defaultValue: 'true', description:'')
+        choice (name: 'VERSION', choices: ['1.0','2.0','3.2'] ,description:'')
+        booleanParam (name: 'executeTest', defaultValue: 'true', description:'')
     }
 
 
@@ -20,26 +20,30 @@ pipeline{
     // }
 
     stages{
-        steps("build"){
+        stage("build"){
             // conditional statement  : BRANCH_NAME is environment variable : Location="jenkinsurl/env-vars.html"
             // when{
             //     expression{
             //         BRANCH_NAME == "dev" || BRANCH_NAME == "master"
             //     }
             // }
-            echo "building version ${New_VERSION}"// variable should be in double quote
+                steps{
+            echo "building version ${NEW_VERSION}"// variable should be in double quote
             // echo 'echo version ${NEW_VERSION}'
         }
-        steps("test"){  
-            when{
+        }
+        stage("test"){
+              
+           when{
                 expression{
                     params.executeTest == true
                 }
             }
+            steps{
             echo "tesing"
-
+            }
         }
-        steps("deploy"){
+        stage("deploy"){
             // echo "deplotih to $SERVER_CREDENTIALS"
             //  to defined the local scope for credential use withCredentials
             // withCredentials(
@@ -48,7 +52,9 @@ pipeline{
             //     ]
             // )
             // sh "script to copy ${user} ${PASS}" use credential 
-             echo "deploying vetrsiob ${params.VERSION}"
+             steps{
+             echo "deploying vetrsiob $params.VERSION"
+        }
         }
        
         
