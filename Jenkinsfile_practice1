@@ -1,0 +1,29 @@
+pipeline{
+    agent any
+    tools{
+        maven = "Maven"
+    }
+
+    stages{
+        stage(){
+
+        }
+        stage(){
+
+        }
+        stage(){
+
+        }
+    }
+    post{
+        always{
+
+        }
+        success{
+
+        }
+        failure{
+            
+        }
+    }
+}
