@@ -1,0 +1,38 @@
+def gv
+pipeline{
+    stages{
+        stage("init"){
+            steps{
+                script{
+                    gv = load "script.groovy"
+                }
+            }
+        }
+        stage("build")
+        {
+            steps{
+                script{
+                    gv.building()
+                }
+            }
+        }
+
+        stage("testing")
+        {
+            steps{
+                script{
+                    gv.test()
+                }
+            }
+        }
+
+        stage("deploying")
+        {
+            steps{
+                script{
+                    gv.deploy()
+                }
+            }
+        }
+    }
+}
