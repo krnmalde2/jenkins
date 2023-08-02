@@ -41,7 +41,7 @@ pipeline{
 
                 
                 
-            }
+            
             steps{
                 script{
                  env.ENV = input message: "select the version", ok:"done",choice (name: 'VERSION' , choices:["prod","test"],description:(''))
