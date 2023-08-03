@@ -3,7 +3,7 @@ def buildjar(){
     sh 'mvn package'
     echo "Building jar file successfully and testing github webhook"
 
-    sh 'mvn build-helper:parse-version versions:set \  
+    sh 'mvn build-helper:parse-version versions:set /
 -DnewVersion=\\\${parsedVersion.nextMajorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.incrementalVersion} \  
 versions:commit'  
     def match = readFile('pom.xml')=~'<version>(.+)<version>'
