@@ -1,8 +1,8 @@
 def buildjar(){
-<<<<<<< HEAD
+
     sh 'mvn package'
     echo "Building jar file successfully and testing github webhook"
-=======
+
     sh 'mvn build-helper:parse:version versions:set -DnewVersions= \\\
         ${parseVersion.nextMajorVersion}.\\\${parseVersion.minorVersion}.\\\${parseVersion.incrementalVersion}'
     def match = readFile('pom.xml')=~'<version>(.+)<version>'
@@ -12,7 +12,7 @@ def buildjar(){
 
 
     sh 'mvn clean package'
->>>>>>> added version
+
 }
 
 def deployment(){
