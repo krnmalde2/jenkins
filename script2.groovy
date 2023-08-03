@@ -1,6 +1,6 @@
 def buildjar(){
     sh 'mvn package'
-    echo "Building jar file successful"
+    echo "Building jar file successfully"
 }
 
 def deployment(){
