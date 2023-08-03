@@ -38,7 +38,7 @@ pipeline {
                     //  def version= match[0][1]
                     // echo "new version is $version"
                     // env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    gv.buildJar()
+                    gv.buildjar()
                 }
             }
         }
