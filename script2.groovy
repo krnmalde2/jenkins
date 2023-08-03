@@ -26,7 +26,7 @@ def deployment(){
         sh "echo $PASS | docker login -u $USER --password-stdin"
 <<<<<<< HEAD
         sh 'docker push krnmalde/jenkins:5.0'
-        echo "deploy application successfully"
+        echo "deploy application successfully deployed"
 =======
         sh "docker push krnmalde/jenkins:$IMAGE_VERSION"
 >>>>>>> added version
