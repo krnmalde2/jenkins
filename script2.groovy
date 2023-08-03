@@ -10,23 +10,10 @@ def buildjar(){
 
 }
 
-def deployment(){
-    withCredentials([usernamePassword(
-        credentialsId:'dockerhub repo',
-        usernameVariable:'USER',
-        passwordVariable:'PASS'
-    )])
-    {
-        sh "docker build -t krnmalde/jenkins:${IMAGE_NAME} ."
-        sh "echo $PASS | docker login -u $USER --password-stdin"
-
+// def deployment(){
     
-        echo "deploy application successfully deployed"
-        sh "docker push krnmalde/jenkins:${IMAGE_NAME}"
-
-    }
 
 
-}
+// }
 
 return this
