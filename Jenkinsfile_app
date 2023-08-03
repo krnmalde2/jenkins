@@ -32,7 +32,7 @@ pipeline {
             stage('commit version update'){  
            steps{  
               script{  
-                  withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-ssh-key', keyFileVariable: 'keyfile')]){ 
+                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable:'USER',passwordVariable:'PASS')]){  
                  // set some Git configuration, we can also set this in the Jenkins server  
                           sh 'git config --global user.email "jenkins@example.com"'  
                           sh 'git config --global user.name "jenkins"'  
@@ -41,16 +41,15 @@ pipeline {
                           sh 'git branch'  
                           sh 'git config --list'  
 
-                          //sh "git remote set-url origin git@github.com/krnmalde2/jenkins.git"  
+                          sh "git remote set-url origin https://${USER}:${PASS}@github.com/krnmalde2/jenkins.git"  
 //                            
-                          sh "git remote set-url origin git@github.com:krnmalde2/jenkins.git"  
-//                            //sh "git push -u origin jenkins-jobs"  
                           sh 'git add .'  
                           sh "git remote -v"  
-                          sh 'git commit -m "ci: version bump"'  
+                          sh 'git commit -m "ci: version bump"' 
+                        // sh "git push -u origin master"  
 
-                                sh 'GIT_SSH_COMMAND="ssh -i $keyfile"'  
-                          sh 'git push origin HEAD:master' //need to specify the branch name her' //need to specify the branch name here. Because  
+                                // sh 'GIT_SSH_COMMAND="ssh -i $keyfile"'  
+                          sh 'git push origin HEAD:master' //need to specify the branch name here. Because  
                        }  
               }  
            }  
