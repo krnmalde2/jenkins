@@ -23,7 +23,7 @@ pipeline {
     def match = readFile('pom.xml')=~'<version>(.+)<version>'
     def version= match[0][1]
     echo "new version is $version"
-    env.IMAGE_VERSION = "$version-$BUILD_NUMBER"
+    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                     gv.buildJar()
                 }
             }
