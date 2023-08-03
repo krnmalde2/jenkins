@@ -12,7 +12,7 @@ def deployment(){
         sh 'docker build -t krnmalde/jenkins:5.0 .'
         sh "echo $PASS | docker login -u $USER --password-stdin"
         sh 'docker push krnmalde/jenkins:5.0'
-        echo "deploy application success
+        echo "deploy application successfully"
     }
 
 
